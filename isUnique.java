@@ -3,10 +3,31 @@
 
 public class StringQuestions {
 
+    // Book Solution - bit vector
+    
+    static boolean isUniqueBitVector(String str) {
+        //bit vector to keep track of letter occurrences in string - ex) 000000...00010
+        int checker = 0;
+
+        for(int i = 0; i < str.length(); i++) {
+            // find place in bit vector
+            int val = str.charAt(i) - 'a';
+            // checks if 1
+            if((checker & (1 << val)) > 0) {
+                return false;
+            } else {
+                // new letter occurrence, turn bit on in bit vector
+                checker |= (1 << val);
+            }
+        }
+        return true;
+    }   
+
     // Book Solution - using boolean array, characters' ascii values as indices to check for value true (indicating previous occurrence)  
     static boolean isUniqueChars(String str) {
         boolean isUnique = true;
         // false for each index meaning no occurrence of char (ascii value) yet
+        // 128 - size of ASCII alphabet
         boolean[] char_set = new boolean[128]; 
         for (int i= 0; i < str.length(); i++) {
             // get the ascii value of current char in string
