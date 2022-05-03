@@ -6,6 +6,48 @@
 
 public class StringQuestions {
 
+    // book solution 1 - Sort and compare
+    static String sort(String s) {
+        char[] content = s.toCharArray();
+        java.util.Arrays.sort(content);
+        return n ew String(content);
+    }
+
+    static boolean isPermutationB1(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        return sort(s).equals(sort(t));
+    }
+
+
+    // book solution2
+    static boolean isPermutationB2(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        int[] letters = new int[128]; 
+
+        char[] s_array = s.toCharArray();
+        // why does this automatically give you the numeric value of char and not the letter?
+        for (char c : s_array) {
+            // count occurrence - goes to numeric index (representing current char) in letters[] and +1
+            letters[c]++;
+        }
+        // at this point, letters[] has a count of all character occurrences in string 1
+        for(int i = 0; i < t.length(); i++) {
+            int c = (int) t.charAt(i);
+            letters[c]--;
+            // if an element of letters[] == -1, we know that string 2 contains a char not present in string s
+            // because there were 0 occurrences in letters[char c] decrementing => -1
+            if (letters[c] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     // compare sums of ascii values
     static boolean isPermutation(String a, String b) {
         int aCharSum = 0;
@@ -72,12 +114,12 @@ public class StringQuestions {
     }
 
     public static void main(String []args){
-        
+
         // Equal case (false)
         isPermutation1("same", "same");
         
         // True case
-        print(isPermutation1("abcd", "dcba");
+        print(isPermutation1("abcd", "dcba"));
 
         // False case
         isPermutation1("notpermutation", "random");
