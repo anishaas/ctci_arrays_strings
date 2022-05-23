@@ -4,13 +4,13 @@
 // Implement an algorithm to determine if a string has all unique characters
 // What if you cannot use an additional data structure?
 
-public class StringQuestions {
+public class checkPermutations {
 
     // book solution 1 - Sort and compare
     static String sort(String s) {
         char[] content = s.toCharArray();
         java.util.Arrays.sort(content);
-        return n ew String(content);
+        return new String(content);
     }
 
     static boolean isPermutationB1(String s, String t) {
